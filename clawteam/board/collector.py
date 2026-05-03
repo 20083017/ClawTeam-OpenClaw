@@ -15,7 +15,12 @@ class BoardCollector:
 
     @staticmethod
     def _member_alias_index(config) -> dict[str, dict]:
-        """Map known member identifiers to a canonical display payload."""
+        """Map member inbox/logical names to display metadata.
+
+        Returns a dict keyed by on-disk inbox names plus bare logical names when
+        those names are unique within the team. Each value contains the
+        canonical ``memberKey``, display ``name``, and optional ``user``.
+        """
         unique_names: dict[str, list[dict]] = {}
         aliases: dict[str, dict] = {}
         for member in config.members:
@@ -34,7 +39,12 @@ class BoardCollector:
         return aliases
 
     def collect_team_summary(self, team_name: str) -> dict:
-        """Collect only the lightweight summary needed for overview screens."""
+        """Collect the lightweight summary used by overview screens.
+
+        Returns a dict with ``name``, ``description``, ``leader``, ``members``,
+        ``tasks``, and ``pendingMessages`` without building the full team
+        snapshot or message history payload.
+        """
         config = TeamManager.get_team(team_name)
         if not config:
             raise ValueError(f"Team '{team_name}' not found")
