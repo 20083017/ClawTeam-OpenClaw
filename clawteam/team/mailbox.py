@@ -196,12 +196,12 @@ class MailboxManager:
         if callable(claim_messages):
             return self._parse_claimed_messages(claim_messages(agent_name, limit))
         raw = self._transport.fetch(agent_name, limit=limit, consume=True)
-        return [TeamMessage.model_validate(json.loads(r)) for r in raw]
+        return self._parse_messages(raw)
 
     def peek(self, agent_name: str) -> list[TeamMessage]:
         """Return pending messages without consuming them."""
         raw = self._transport.fetch(agent_name, consume=False)
-        return [TeamMessage.model_validate(json.loads(r)) for r in raw]
+        return self._parse_messages(raw)
 
     def _find_by_idempotency_key(self, key: str) -> TeamMessage | None:
         """Check event log for a message with the same idempotency key."""

@@ -23,6 +23,7 @@ Versioning follows [PEP 440](https://peps.python.org/pep-0440/) with `+openclaw`
 
 ### Fixed
 
+- Board overview summaries, board message metadata, and mailbox peek/claim resilience (cherry-picked from upstream sync) ([#64](https://github.com/win4r/ClawTeam-OpenClaw/pull/64))
 - Waiter zero-tasks edge case (cherry-picked from upstream [#101](https://github.com/HKUDS/ClawTeam/pull/101)) ([#54](https://github.com/win4r/ClawTeam-OpenClaw/pull/54))
 - Windows `Path.rename()` → `os.replace()` in 5 files (cherry-picked from upstream [#102](https://github.com/HKUDS/ClawTeam/pull/102)) ([#54](https://github.com/win4r/ClawTeam-OpenClaw/pull/54))
 - TOCTOU race condition in idempotency check ([#52](https://github.com/win4r/ClawTeam-OpenClaw/pull/52))
