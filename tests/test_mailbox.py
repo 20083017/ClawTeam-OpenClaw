@@ -383,7 +383,7 @@ class TestFileTransport:
         def fake_replace(src, target):
             if Path(src) == message_files[0]:
                 raise OSError("claimed by another consumer")
-            return original_replace(src, target)
+            return original_replace(str(src), str(target))
 
         monkeypatch.setattr(os, "replace", fake_replace)
 
