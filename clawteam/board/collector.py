@@ -122,8 +122,10 @@ class BoardCollector:
             events = mailbox.get_event_log(limit=200)
             for msg in events:
                 payload = json.loads(msg.model_dump_json(by_alias=True, exclude_none=True))
-                from_info = member_aliases.get(payload.get("from") or "")
-                to_info = member_aliases.get(payload.get("to") or "")
+                from_key = payload.get("from", "")
+                to_key = payload.get("to", "")
+                from_info = member_aliases.get(from_key)
+                to_info = member_aliases.get(to_key)
                 if from_info:
                     payload["fromKey"] = from_info["memberKey"]
                     payload["fromLabel"] = from_info["name"]

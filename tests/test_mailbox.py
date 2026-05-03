@@ -381,7 +381,7 @@ class TestFileTransport:
         original_replace = os.replace
 
         def fake_replace(src, target):
-            if src == str(message_files[0]):
+            if Path(src) == message_files[0]:
                 raise OSError("claimed by another consumer")
             return original_replace(src, target)
 
